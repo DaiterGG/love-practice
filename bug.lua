@@ -2,6 +2,7 @@ printTable = function(t)
 	for pos, val in pairs(t) do
 		print("[" .. tostring(pos) .. "] => " .. tostring(val))
 	end
+	print("table end")
 end
 printTableRecursive = function(t)
 	local indent = "Table: "
@@ -35,4 +36,5 @@ printTableRecursive = function(t)
 		end
 	end
 	sub_printTable(t, "")
+	print("table end")
 end

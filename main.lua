@@ -1,3 +1,4 @@
+print("")
 KeyPressed = {}
 KeyReleased = {}
 Update = {}
