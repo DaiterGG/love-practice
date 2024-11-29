@@ -27,7 +27,7 @@ SPEED_MULTIPLIER = 1
 AIR_FRICTION = 0.95
 
 function DrawMain.load()
-	love.graphics.setCanvas(self.canvas)
+	love.graphics.setCanvas()
 end
 
 table.insert(KeyPressed, function(key, unicode)
@@ -42,6 +42,11 @@ table.insert(KeyPressed, function(key, unicode)
 	-- end)
 	-- end
 end)
+
+local function mainCircle(w, h)
+	love.graphics.clear()
+	love.graphics.circle("fill", w, h, 50)
+end
 
 table.insert(Update, function(dt)
 	local xAcc = 0
@@ -73,11 +78,6 @@ end)
 
 function DrawMain.draw()
 	love.graphics.draw(canvas)
-end
-
-function mainCircle(w, h)
-	love.graphics.clear()
-	love.graphics.circle("fill", w, h, 50)
 end
 
 return DrawMain
