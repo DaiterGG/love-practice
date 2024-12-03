@@ -21,7 +21,7 @@ local lastPoint = {
 local img = love.graphics.newImage(love.filesystem.newFileData("assets/circle.png"))
 
 local myShader = love.graphics.newShader("shader.frag.shader")
-local myTrail = love.graphics.newShader("trail.frag.shader")
+-- local myTrail = love.graphics.newShader("trail.frag.shader")
 local circle = {
 	pivot = {
 		x = SCREEN_WIDTH / 2,

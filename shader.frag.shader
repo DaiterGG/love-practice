@@ -77,13 +77,15 @@ vec3 valueNoiseColor2d(vec2 value) {
 
 extern number time;
 vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords) {
-    gridX = floor(screen_coords.x / 50);
-    gridY = floor(screen_coords.y / 50);
-    dotX = rand2dTo1d(vec2(gridX, gridY));
-    dotY = rand2dTo1d(vec2(gridY, gridX));
-    number dist = length(vec2(dotX, dotY), vec2(screen_coords.x, texture_coords.y));
-    vec4 pixel = Texel(texture, res) * color;
-    return pixel;
+    number n = time * 0;
+    number gridX = floor(screen_coords.x / 50);
+    number gridY = floor(screen_coords.y / 50);
+    number dotX = rand2dTo1d(vec2(gridX, gridY));
+    number dotY = rand2dTo1d(vec2(gridY, gridX));
+    number dist = length(vec2(dotX, dotY));
+
+    vec4 pixel = Texel(texture, texture_coords) * color;
+    return pixel * n;
 }
 number randomLine(vec2 screen, vec2 texture, number ceil) {
     number cellX = screen.x / ceil;
