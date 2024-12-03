@@ -77,54 +77,14 @@ vec3 valueNoiseColor2d(vec2 value) {
 
 extern number time;
 vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords) {
-    // number pW = 1 / love_ScreenSize.x; //pixel width
-    // number pH = 1 / love_ScreenSize.y; //pixel height
-    // // vec2 coords = vec2(texture_coords.x, texture_coords.y);
-    // // coords = vec2(texture_coords.x + pW * 20, texture_coords.y);
-    // number grid = 70;
-    // number gridX = pW * grid;
-    // number gridY = pH * grid;
-    // vec2 coords = vec2(texture_coords.x, texture_coords.y);
-    // number x = texture_coords.x;
-    // number y = texture_coords.y;
-    // number dirX = -1;
-    // number dirY = -1;
-    // if (texture_coords.x < .5) {
-    //     dirX = 1;
-    //     x = 1 - texture_coords.x;
-    // }
-    // if (texture_coords.y < .5) {
-    //     dirY = 1;
-    //     y = 1 - texture_coords.y;
-    // }
-    // number offsetX = floor((x - .5 + gridX / 2) / gridX);
-    // number offsetY = floor((y - .5 + gridY / 2) / gridY);
-    // number resX = texture_coords.x + (offsetX * gridX * dirX);
-    // number resY = texture_coords.y + (offsetY * gridY * dirY);
-
-    // coords = vec2(resX, resY);
-    // vec4 pixel = Texel(texture, coords);
-    // pixel.a = 1;
-    // pixel.rgb = vec3(1.0, 1.0, 1.0);
-
-    number n = time * 0;
-    number cellX = (screen_coords.x + cos(time) * 25) / 50;
-    number cellY = (screen_coords.y + sin(time) * 25) / 50;
-    number fastX = (screen_coords.x - time * 14) / 25;
-    number fastY = (screen_coords.y + time * 14) / 25;
-
-    number noise = valueNoise2d(vec2(cellX, cellY));
-    number fastNoise = valueNoise2d(vec2(fastX, fastY));
-
-    vec2 res = vec2(texture_coords.x - sin(noise) / 50, texture_coords.y - sin(noise) / 50);
-
-    vec4 colorRes = color;
-    colorRes.rgb += vec3(-0.3, -0.1, 1.2 * abs(sin(noise)));
-    colorRes.rgb += .3 * sin(noise);
-    colorRes.rgb += .1 * sin(fastNoise);
-
-    vec4 pixel = Texel(texture, res) * colorRes;
-    return pixel + n;
+    gridX = floor(screen_coords.x / 50);
+    gridY = floor(screen_coords.y / 50);
+    dotX = rand2dTo1d(vec2(gridX, gridY));
+    dotY = rand2dTo1d(vec2(gridY, gridX));
+    number dist = length(vec2(dotX, dotY), vec2(texture_coords.x, texture_coords.y));
+    vec4 pixel = Texel(texture, res) * color;
+    screen_coords
+    return pixel;
 }
 number randomLine(vec2 screen, vec2 texture, number ceil) {
     number cellX = screen.x / ceil;
@@ -141,3 +101,32 @@ number randomLine(vec2 screen, vec2 texture, number ceil) {
 
     return ceil;
 }
+// number pH = 1 / love_ScreenSize.y; //pixel height
+// // vec2 coords = vec2(texture_coords.x, texture_coords.y);
+// // coords = vec2(texture_coords.x + pW * 20, texture_coords.y);
+// number grid = 70;
+// number gridX = pW * grid;
+// number gridY = pH * grid;
+// vec2 coords = vec2(texture_coords.x, texture_coords.y);
+// number x = texture_coords.x;
+// number pW = 1 / love_ScreenSize.x; //pixel width
+// number y = texture_coords.y;
+// number dirX = -1;
+// number dirY = -1;
+// if (texture_coords.x < .5) {
+//     dirX = 1;
+//     x = 1 - texture_coords.x;
+// }
+// if (texture_coords.y < .5) {
+//     dirY = 1;
+//     y = 1 - texture_coords.y;
+// }
+// number offsetX = floor((x - .5 + gridX / 2) / gridX);
+// number offsetY = floor((y - .5 + gridY / 2) / gridY);
+// number resX = texture_coords.x + (offsetX * gridX * dirX);
+// number resY = texture_coords.y + (offsetY * gridY * dirY);
+
+// coords = vec2(resX, resY);
+// vec4 pixel = Texel(texture, coords);
+// pixel.a = 1;
+// pixel.rgb = vec3(1.0, 1.0, 1.0);
