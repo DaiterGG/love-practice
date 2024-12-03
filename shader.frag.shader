@@ -81,9 +81,8 @@ vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords) 
     gridY = floor(screen_coords.y / 50);
     dotX = rand2dTo1d(vec2(gridX, gridY));
     dotY = rand2dTo1d(vec2(gridY, gridX));
-    number dist = length(vec2(dotX, dotY), vec2(texture_coords.x, texture_coords.y));
+    number dist = length(vec2(dotX, dotY), vec2(screen_coords.x, texture_coords.y));
     vec4 pixel = Texel(texture, res) * color;
-    screen_coords
     return pixel;
 }
 number randomLine(vec2 screen, vec2 texture, number ceil) {
