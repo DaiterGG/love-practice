@@ -116,28 +116,28 @@ vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords) 
     number noise = valueNoise2d(vec2(cellX, cellY));
     number fastNoise = valueNoise2d(vec2(fastX, fastY));
 
-    vec2 res = vec2(texture_coords.x - sin(noise) / 50, texture_coords.y - sin(noise) / 50);
+    vec2 res = vec2(texture_coords.x - sin(noise) / 100, texture_coords.y - sin(noise) / 100);
 
     vec4 colorRes = color;
-    colorRes.rgb += vec3(-0.3, -0.1, 1.2 * abs(sin(noise)));
-    colorRes.rgb += .3 * sin(noise);
-    colorRes.rgb += .1 * sin(fastNoise);
+    // colorRes.rgb += vec3(0, 0, .2 * abs(sin(noise)));
+    // colorRes.rgb += .3 * sin(noise);
+    // colorRes.rgb += .1 * sin(fastNoise);
 
     vec4 pixel = Texel(texture, res) * colorRes;
     return pixel + n;
 }
-number randomLine(vec2 screen, vec2 texture, number ceil) {
-    number cellX = screen.x / ceil;
-    number cellY = screen.y / ceil;
-    // number randPrev = rand1dTo1d(floor(cell));
-    // number randNext = rand1dTo1d(ceil(cell));
-    // number interp = EaseInOutSquare(fract(cell));
-    // number rand = Lerp(randPrev, randNext, interp);
-    // // number y = (texture_coords.y - 0.5) * 10;
-    // number y = texture_coords.y;
-    // number dist = abs(rand - y);
-    // number pixelhigh = fwidth(texture_coords.y);
-    // number line = smoothstep(0, pixelhigh, dist);
+// number randomLine(vec2 screen, vec2 texture, number ceil) {
+//     number cellX = screen.x / ceil;
+//     number cellY = screen.y / ceil;
+//     // number randPrev = rand1dTo1d(floor(cell));
+//     // number randNext = rand1dTo1d(ceil(cell));
+//     // number interp = EaseInOutSquare(fract(cell));
+//     // number rand = Lerp(randPrev, randNext, interp);
+//     // // number y = (texture_coords.y - 0.5) * 10;
+//     // number y = texture_coords.y;
+//     // number dist = abs(rand - y);
+//     // number pixelhigh = fwidth(texture_coords.y);
+//     // number line = smoothstep(0, pixelhigh, dist);
 
-    return ceil;
-}
+//     return ceil;
+// }
